@@ -1,54 +1,14 @@
-import { createCanvas, loadImage } from 'canvas';
-import { MessageAttachment } from 'discord.js';
-import { Registration } from '../modules/Registration';
+
+import { WelcomeGenerator } from '../components/generator/welcome';
 import { Command } from '../structures/Command';
 export default new Command({
   name: 'image',
   description: 'Generate an image.',
   run: async ({ interaction }) => {
-    const canvas = createCanvas(700, 250);
-    const context = canvas.getContext('2d');
-
-    const background = await loadImage('./assets/illustrado_bg.png');
-    context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-    context.strokeStyle = '#0099ff';
-    context.strokeRect(0, 0, canvas.width, canvas.height);
-
-    var welcomeX = (canvas.width / 2.7);
-    var welcomeY = (canvas.height / 2) - 15;
-
-    var text = `${interaction.member.user.username}`
-    context.font = applyText(canvas, text);
-    context.fillStyle = '#000000';
-    context.fillText(text,  welcomeX, welcomeY);
-
-    context.font = '25px serif';
-    context.fillStyle = '#808080';
-    context.fillText(`Welcome to Ilustrados!`, welcomeX, welcomeY + 40);
-
-
-    context.beginPath();
-    context.arc(125, 125, 100, 0, Math.PI * 2, true);
-    context.closePath();
-    context.clip();
-
-    const avatar = await loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
-    context.drawImage(avatar, 25, 25, 200, 200);
-
-    const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
-
-    interaction.reply({ content: `${interaction.member.user}, Welcome to Ilustrado!`,files: [attachment] });
+    var welcomeMessage = new WelcomeGenerator()
+    await welcomeMessage.init(interaction.user)
+    interaction.reply(welcomeMessage.getOutput());
   }
 });
 
-const applyText = (canvas, text) => {
-	const context = canvas.getContext('2d');
-	let fontSize = 40;
 
-	do {
-		context.font = `${fontSize -= 10}px serif`;
-	} while (context.measureText(text).width > canvas.width - 300);
-
-	return context.font;
-};

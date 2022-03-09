@@ -24,7 +24,6 @@ export class ExtendedClient extends Client {
   }
 
   start() {
-    this.destroy();
     this.registerModules();
     this.login(process.env.TOKEN);
   }
@@ -34,6 +33,8 @@ export class ExtendedClient extends Client {
   }
 
   async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
+    this.guilds.cache.get(guildId)?.commands.set([])
+    this.application?.commands.set([])
     if (guildId) {
       this.guilds.cache.get(guildId)?.commands.set(commands);
       console.log(`Registered to ${guildId}`);
