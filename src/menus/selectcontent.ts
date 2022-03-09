@@ -1,4 +1,4 @@
-import { SelectContentMenu } from "../components/SelectContentMenu";
+import { SelectContentMenu } from "../components/menu/SelectContentMenu";
 import { Menu } from "../structures/Menu";
 export const MENU_ID = 'select_content';
 export default new Menu( {
