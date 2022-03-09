@@ -12,11 +12,10 @@ export default new Command({
     }
   ],
   run: async ({ interaction }) => {
-    var name = interaction.options.getString('ign')
+    var name = interaction.options.getString('ign');
 
-    
     await interaction.deferReply({ ephemeral: true });
-    var registrationModule = new Registration(name)
+    var registrationModule = new Registration(name);
     await interaction.editReply({
       content: 'hello '
     });

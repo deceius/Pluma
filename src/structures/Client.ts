@@ -11,11 +11,13 @@ import glob from 'glob';
 import { promisify } from 'util';
 import { RegisterCommandsOptions } from '../typings/client';
 import { Event } from './Event';
+import { MenuType } from '../typings/menu';
 
 const globPromise = promisify(glob);
 
 export class ExtendedClient extends Client {
   commands: Collection<string, CommandType> = new Collection();
+  menus: Collection<string, MenuType> = new Collection()
 
   constructor() {
     super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -70,6 +72,19 @@ export class ExtendedClient extends Client {
     eventFiles.forEach(async (filePath) => {
       const event: Event<keyof ClientEvents> = await this.importFile(filePath);
       this.on(event.event, event.run);
+    });
+
+    // MENUS
+    const menuFiles = await globPromise(
+      `${__dirname}/../menus/**/*{.ts,.js}`
+    );
+
+    console.log({ menuFiles });
+    menuFiles.forEach(async (filePath) => {
+      const command: MenuType = await this.importFile(filePath);
+      if (!command) return;
+      console.log(command)
+      this.menus.set(command.id, command);
     });
   }
 }

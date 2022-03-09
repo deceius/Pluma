@@ -4,7 +4,8 @@ import { Command } from '../structures/Command';
 
 export default new Command({
   name: 'data',
-  description: 'Fetch your Albion Online account data bound to your Discord account.',
+  description:
+    'Fetch your Albion Online account data bound to your Discord account.',
   options: [
     {
       name: 'user',
@@ -14,9 +15,8 @@ export default new Command({
     }
   ],
   run: async ({ interaction }) => {
-    var user: User = interaction.options.getUser('user')
+    var user: User = interaction.options.getUser('user');
     await interaction.deferReply();
-    await interaction.editReply(`Data Found!`)
-   
+    await interaction.editReply(`Data Found!`);
   }
 });
