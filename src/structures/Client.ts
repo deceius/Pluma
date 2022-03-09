@@ -23,6 +23,7 @@ export class ExtendedClient extends Client {
   }
 
   start() {
+    console.log(`######## START`)
     this.registerModules();
     this.login(process.env.TOKEN);
   }
@@ -81,7 +82,6 @@ export class ExtendedClient extends Client {
     menuFiles.forEach(async (filePath) => {
       const command: MenuType = await this.importFile(filePath);
       if (!command) return;
-      console.log(command);
       this.menus.set(command.id, command);
     });
   }
