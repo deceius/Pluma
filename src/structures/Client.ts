@@ -1,5 +1,4 @@
 import {
-  ApplicationCommandData,
   ApplicationCommandDataResolvable,
   Client,
   ClientEvents,

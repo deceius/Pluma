@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageSelectMenu } from 'discord.js';
+import { MessageActionRow } from 'discord.js';
 import { SelectContentMenu } from '../components/menu/SelectContentMenu';
 import { MENU_ID } from '../menus/selectcontent';
 import { Command } from '../structures/Command';

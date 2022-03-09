@@ -1,5 +1,4 @@
 import { User } from 'discord.js';
-import { Registration } from '../modules/Registration';
 import { Command } from '../structures/Command';
 
 export default new Command({
