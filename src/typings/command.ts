@@ -7,10 +7,8 @@ import {
 } from 'discord.js';
 import { ExtendedClient } from '../structures/Client';
 
-
 export interface ExtendedInteraction extends CommandInteraction {
   member: GuildMember;
-
 }
 
 interface RunOptions {
@@ -25,4 +23,3 @@ export type CommandType = {
   userPermissions?: PermissionResolvable[];
   run: RunFunction;
 } & ChatInputApplicationCommandData;
- 

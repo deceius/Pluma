@@ -22,6 +22,7 @@ export class ExtendedClient extends Client {
   }
 
   start() {
+    this.destroy();
     this.registerModules();
     this.login(process.env.TOKEN);
   }
@@ -53,12 +54,12 @@ export class ExtendedClient extends Client {
       this.commands.set(command.name, command);
       slashCommands.push(command);
     });
-    this.on("ready", () => {
+    this.on('ready', () => {
       this.registerCommands({
-          commands: slashCommands,
-          guildId: process.env.guildId
+        commands: slashCommands,
+        guildId: process.env.GUILD_ID
       });
-  });
+    });
 
     // EVENT
     const eventFiles = await globPromise(
