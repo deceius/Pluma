@@ -1,7 +1,5 @@
 import { createCanvas, loadImage } from 'canvas';
-import { MessageOptions } from 'child_process';
 import { InteractionReplyOptions, MessageAttachment, User } from 'discord.js';
-import { ExtendedInteraction } from '../../typings/command';
 export class WelcomeGenerator {
   output: InteractionReplyOptions;
 
@@ -35,10 +33,7 @@ export class WelcomeGenerator {
     const avatar = await loadImage(user.displayAvatarURL({ format: 'jpg' }));
     context.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new MessageAttachment(
-      canvas.toBuffer(),
-      'profile-image.png'
-    );
+    const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
 
     this.output = {
       content: `${user}, welcome to our humble server!`,

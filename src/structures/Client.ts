@@ -77,7 +77,6 @@ export class ExtendedClient extends Client {
 
     // MENUS
     const menuFiles = await globPromise(`${__dirname}/../menus/**/*{.ts,.js}`);
-
     console.log({ menuFiles });
     menuFiles.forEach(async (filePath) => {
       const command: MenuType = await this.importFile(filePath);
