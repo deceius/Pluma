@@ -1,4 +1,3 @@
-
 import { MenuType } from '../typings/menu';
 
 export class Menu {

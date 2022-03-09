@@ -17,7 +17,7 @@ const globPromise = promisify(glob);
 
 export class ExtendedClient extends Client {
   commands: Collection<string, CommandType> = new Collection();
-  menus: Collection<string, MenuType> = new Collection()
+  menus: Collection<string, MenuType> = new Collection();
 
   constructor() {
     super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -75,15 +75,13 @@ export class ExtendedClient extends Client {
     });
 
     // MENUS
-    const menuFiles = await globPromise(
-      `${__dirname}/../menus/**/*{.ts,.js}`
-    );
+    const menuFiles = await globPromise(`${__dirname}/../menus/**/*{.ts,.js}`);
 
     console.log({ menuFiles });
     menuFiles.forEach(async (filePath) => {
       const command: MenuType = await this.importFile(filePath);
       if (!command) return;
-      console.log(command)
+      console.log(command);
       this.menus.set(command.id, command);
     });
   }
