@@ -36,7 +36,7 @@ export class WelcomeGenerator {
     const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
 
     this.output = {
-      content: `${user}, welcome to our humble server!`,
+      content: `${user}, welcome to our discord server!`,
       files: [attachment]
     };
   }

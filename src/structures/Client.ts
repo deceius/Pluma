@@ -19,7 +19,7 @@ export class ExtendedClient extends Client {
   menus: Collection<string, MenuType> = new Collection();
 
   constructor() {
-    super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+    super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
   }
 
   start() {
